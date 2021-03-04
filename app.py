@@ -2,7 +2,6 @@ import streamlit as st
 
 import pandas as pd
 
-from bokeh.plotting import figure
 import matplotlib.pyplot as plt
 
 
@@ -51,16 +50,12 @@ col1, col2 = st.beta_columns([2, 1])
 with col1:
     plotting_lib = st.radio(
         "Select plotting library",
-        ('Default (Altair)', 'Bokeh', 'Matplotlib'))
+        ('Default (Altair)', 'Matplotlib'))
 
     if plotting_lib == 'Matplotlib':
         fig, ax = plt.subplots()
         ax.plot(sample_crimes_per_year_df.index, sample_crimes_per_year_df.values)
         st.pyplot(fig)
-    elif plotting_lib == 'Bokeh':
-        p = figure(x_axis_label='x', y_axis_label='y')
-        p.line(sample_crimes_per_year_df.index, sample_crimes_per_year_df.values)
-        st.bokeh_chart(p, use_container_width=True)
     else:
         st.line_chart(sample_crimes_per_year_df)
 
